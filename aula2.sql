@@ -20,3 +20,14 @@ SET IDENTITY_INSERT sales.stores OFF;
 SET IDENTITY_INSERT production.brands ON;
 INSERT INTO production.brands(brand_id, brand_name) VALUES (10, 'Biklas')
 INSERT INTO production.brands(brand_id, brand_name) VALUES (11, 'Lx Trotinetes')
+
+-- exerc_3 --
+UPDATE sales.stores SET phone = '+351 2121212121' WHERE store_id = 5
+UPDATE production.brands SET brand_name = 'Lx Cycles' WHERE brand_id = 10
+UPDATE production.brands SET brand_name = upper(brand_name) WHERE brand_id = 10
+
+-- exerc_4 --
+DELETE FROM sales.stores WHERE store_id = 4
+DELETE FROM sales.stores WHERE store_id = 5
+DELETE FROM production.brands WHERE brand_id = 10
+DELETE FROM production.brands WHERE brand_id = 11
