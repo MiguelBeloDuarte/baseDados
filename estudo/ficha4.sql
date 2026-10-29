@@ -31,4 +31,21 @@ HAVING  model_year IN (2017, 2019)
 -- Exercício 1 --
 SELECT first_name AS Nome, last_name AS Apelido, email AS Email,
 CASE
-    WHEN LEN(email) > 25 THEN LOWER(first_name,1)
+    WHEN LEN(email) > 25 THEN LOWER(CONCAT(LEFT(first_name,1),'.',last_name,'@',SUBSTRING(email,CHARINDEX('@',email) + 1,LEN(email))))
+    ELSE email
+END AS 'Novo Email'
+FROM sales.customers
+
+UPDATE sales.customers SET email = LOWER(CONCAT(LEFT(first_name,1),'.',last_name,'@',SUBSTRING(email,CHARINDEX('@',email) + 1,LEN(email)))) WHERE LEN(email) > 25
+
+UPDATE sales.customers SET email = LOWER(CONCAT(first_name,'.',last_name,'@',SUBSTRING(email,CHARINDEX('@',email) + 1,LEN(email))))
+
+SELECT product_name, list_price,
+CASE
+    WHEN list_price > 4000 THEN '50%'
+    WHEN list_price > 3000 THEN '23%'
+    WHEN list_price > 2000 THEN '13%'
+    WHEN list_price > 1000 THEN '6%'
+    ELSE '0%'
+END AS '% IVA'
+FROM production.products
